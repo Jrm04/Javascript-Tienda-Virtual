@@ -27,8 +27,6 @@ nav{
     border-bottom: 1px solid var(--very-light-pink);
 }
 
-
-
 .menu{
     display: none;
     cursor: pointer;
@@ -112,7 +110,7 @@ nav{
     background-color: var(--white);
     width: 100px;
     height: auto;
-    border: 1px solid var(--very-light-pink);
+    border: 1px solid var(--hospital-green);
     border-radius: 6px;
     padding: 20px 20px 0 20px;
 }
@@ -154,7 +152,9 @@ nav{
     background-color: var(--white);
     position: absolute;
     top: 60px;
-    padding: 24px;
+    padding: 20px;
+    border: 1px solid var(--hospital-green);
+    border-radius: 8px;
   }
   .mobile-menu a {
     text-decoration: none;
@@ -186,8 +186,10 @@ nav{
 
   .product-detail {
       background-color: var(--white);
+      border: 1px solid var(--hospital-green);
+      border-radius: 8px;
       width: 360px;
-      padding: 0 24px;
+      padding: 20px 24px;
       box-sizing: border-box;
       position: absolute;
       right: 0;
@@ -260,27 +262,84 @@ nav{
       height: 50px;
   }
 
+  /* Lista de Productos */
+
+  .cards-container{
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 240px);
+    gap: 26px;
+    place-content: center;
+}
+
+.product-card{
+    width: 240px;
+}
+
+.product-card img{
+    width: 240px;
+    height: 240px;
+    border-radius: 20px;
+    object-fit: cover; /* Este funcion hace que la imagen quede en su tamaño original pero dentro del width y el heidth que le hayamos asignado */
+}
+
+.product-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.product-info figure{
+    margin: 0;
+}
+
+.product-info figure img {
+    width: 35px;
+    height: 35px;
+}
+
+.product-info div p:nth-child(1){
+    font-weight: bold;
+    font-size: var(--md);
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.product-info div p:nth-child(2){
+    font-size: var(--sm);
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--very-light-pink);
+}
+
+
+
 @media (max-width:640px) {
     .menu{
         display: block;
-
     }
 
-    .navbar-left ul {
-        display: none;
-    }
-
-    .navbar-email{
-        display: none;
-    }
-
-    .desktop-menu {
+    .navbar-left ul, .navbar-email, .desktop-menu {
         display: none;
     }
 
     .product-detail {
         width: 100%;
       }
+
+      .cards-container{
+        grid-template-columns: repeat(auto-fill, 140px);
+    }
+
+    .product-card{
+        width: 140px;
+    }
+
+    .product-card img{
+        width: 140px;
+        height: 140px;
+    }
 }
 
 
