@@ -5,6 +5,8 @@ const mobileMenu = document.querySelector('.mobile-menu');
 const carrito = document.querySelector('.navbar-shopping-card');
 const shoppingCardContainer = document.querySelector('#shoppingCardContainer');
 const cardsContainer = document.querySelector('.cards-container');
+const productDetail = document.querySelector('#productDetail');
+const productDetailClose = document.querySelector('.product-detail-close');
 
 
 /*
@@ -35,9 +37,14 @@ burguerMenu.addEventListener('click', () => {
     caso contrario si el carrito está abierto, por lo cual si queremos ver ell menú tenemos que añadir la clase inactive */
 
     const isshoppingCardContainerClosed = shoppingCardContainer.classList.contains('inactive');
+    const isProductDetailClose = productDetail.classList.contains('inactive');
 
     if(!isshoppingCardContainerClosed){
         shoppingCardContainer.classList.add('inactive');
+    }
+
+    if(!isProductDetailClose){
+        productDetail.classList.add('inactive');
     }
 
     mobileMenu.classList.toggle('inactive');
@@ -52,6 +59,7 @@ menú y podamos ver el carrito
 
     const isMobileMenuClose = mobileMenu.classList.contains('inactive');
     const isDeskptoMenuClose = desktopMenu.classList.contains('inactive');
+    const isProductDetailClose = productDetail.classList.contains('inactive');
 
     if(!isMobileMenuClose){
         mobileMenu.classList.add('inactive');
@@ -59,6 +67,10 @@ menú y podamos ver el carrito
 
     if(!isDeskptoMenuClose){
         desktopMenu.classList.add('inactive');
+    }
+
+    if(!isProductDetailClose){
+        productDetail.classList.add('inactive');
     }
 
     shoppingCardContainer.classList.toggle('inactive');
@@ -103,61 +115,78 @@ productsList.push({
 });
 
 
-
-
 function renderProducts(arr){
     for (product of arr){
-        const productCard = `<div class="product-card">
-                    <img src="${product.image}" alt="">
-                    <div class="product-info">
-                        <div>
-                            <p> $ ${product.price}</p>
-                            <p>${product.name}</p>        
-                        </div>
-                        <figure>
-                            <img src="./Platzi_YardSale_Icons/bt_add_to_cart.svg" alt="">
-                        </figure>
-                    </div>
-                </div>`;
+
+        /* const productCard = `<div class="product-card">
+        <img src="${product.image}" alt="" class="product-card-img">
+        <div class="product-info">
+        <div>
+        <p> $ ${product.price}</p>
+        <p>${product.name}</p>        
+        </div>
+        <figure>
+        <img src="./Platzi_YardSale_Icons/bt_add_to_cart.svg" alt="">
+        </figure>
+        </div>
+        </div>`;
         
-        cardsContainer.innerHTML += productCard;
-        /* const productCard = document.createElement('div');
+        cardsContainer.innerHTML += productCard; */
+        
+
+        const productCard = document.createElement('div');
         productCard.classList.add('product-card');
-    
+                        
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
-    
+        productImg.addEventListener('click', () => {
+            const isshoppingCardContainerClosed = shoppingCardContainer.classList.contains('inactive');
+            const isMobileMenuClose = mobileMenu.classList.contains('inactive');
+
+            if(!isshoppingCardContainerClosed){
+                shoppingCardContainer.classList.add('inactive');
+            }
+
+            if(!isMobileMenuClose){
+                mobileMenu.classList.add('inactive');
+            }
+
+            productDetail.classList.remove('inactive'); /* Esta funcion muestra el detalle de un producto seleccionado */
+
+        });
+        productDetailClose.addEventListener('click', () => {
+            productDetail.classList.add('inactive');
+        })
+        
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
-    
+        
         const productInfoDiv = document.createElement('div');
-    
+        
         const productPrice = document.createElement('p');
         productPrice.innerText = '$' + product.price;
-    
+        
         const productName = document.createElement('p');
         productName.innerText = product.name;
-    
+        
         const productInfoFigure = document.createElement('figure');
-    
+        
         const imgCarrito = document.createElement('img');
         imgCarrito.setAttribute('src', './Platzi_YardSale_Icons/bt_add_to_cart.svg');
-    
-    
+        
+        
         //Insertar los elementos hios dentro de los elementos padres
-    
+        
         productInfoFigure.appendChild(imgCarrito);
-    
+        
         productInfoDiv.append(productPrice, productName);
-    
+        
         productInfo.append(productInfoDiv, productInfoFigure);
-    
+        
         productCard.append(productImg, productInfo);
-    
-        cardsContainer.appendChild(productCard) */
-    
+        
+        cardsContainer.appendChild(productCard)
+        
     }
 }
 renderProducts(productsList);
-                   
-
